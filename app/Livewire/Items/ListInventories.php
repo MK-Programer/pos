@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Items;
 
+use App\Livewire\Widgets\Buttons\DeleteButton;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -46,7 +47,7 @@ class ListInventories extends Component implements HasActions, HasSchemas, HasTa
                 //
             ])
             ->recordActions([
-                //
+                DeleteButton::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
