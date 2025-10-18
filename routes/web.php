@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Customer\ListCustomers;
+use App\Livewire\Items\EditItem;
 use App\Livewire\Items\ListInventories;
 use App\Livewire\Items\ListItems;
 use App\Livewire\Management\ListPaymentMethods;
@@ -38,13 +39,29 @@ Route::middleware(['auth'])->group(function () {
             ),
         )
         ->name('two-factor.show');
+    
+    Route::prefix('management')->group(function(){
+        Route::get('manage-customers', ListCustomers::class)->name('customers.index');
 
-    Route::get('manage-users', ListUsers::class)->name('users.index');
-    Route::get('manage-items', ListItems::class)->name('items.index');
-    Route::get('manage-inventories', ListInventories::class)->name('inventories.index');
-    Route::get('manage-sales', ListSales::class)->name('sales.index');
-    Route::get('manage-customers', ListCustomers::class)->name('customers.index');
-    Route::get('manage-payment-methods', ListPaymentMethods::class)->name('payment.methods.index');
+        Route::get('manage-payment-methods', ListPaymentMethods::class)->name('payment.methods.index');
+
+        Route::get('manage-users', ListUsers::class)->name('users.index');
+    });
+
+    Route::prefix('inventory-management')->group(function(){
+
+        Route::prefix('items')->group(function(){
+            Route::get('/', ListItems::class)->name('items.index');
+            Route::get('{record}/edit', EditItem::class)->name('item.edit');
+        });
+        
+    
+        Route::get('manage-inventories', ListInventories::class)->name('inventories.index');
+    });
+
+    Route::prefix('sales')->group(function(){
+        Route::get('manage-sales', ListSales::class)->name('sales.index');
+    });
 });
 
 require __DIR__.'/auth.php';
