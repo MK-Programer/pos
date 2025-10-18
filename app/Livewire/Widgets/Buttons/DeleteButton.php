@@ -8,10 +8,10 @@ class DeleteButton extends BaseButton
     {
         $this->name('delete')
             ->label('Delete')
-            ->icon('heroicon-o-trash')
+            // ->icon('heroicon-o-trash')
             ->color('danger')
-            ->successMessage('Deleted successfully')
-            ->errorMessage('Error while deleting')
+            ->successTitleMessage('Deleted successfully')
+            ->errorTitleMessage('Deletion error')
             ->requiresConfirmation()
             ->onAction(fn($record) => $record->delete());
     }
