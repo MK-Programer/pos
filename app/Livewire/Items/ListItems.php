@@ -3,6 +3,7 @@
 namespace App\Livewire\Items;
 
 use App\Livewire\Widgets\Buttons\DeleteButton;
+use App\Livewire\Widgets\Buttons\EditButton;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -50,6 +51,7 @@ class ListItems extends Component implements HasActions, HasSchemas, HasTable
             ->headerActions([
             ])
             ->recordActions([
+                EditButton::make(),
                 DeleteButton::make(),
             ])
             ->toolbarActions([
