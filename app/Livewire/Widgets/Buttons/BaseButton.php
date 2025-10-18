@@ -2,9 +2,10 @@
 
 namespace App\Livewire\Widgets\Buttons;
 
+use App\Enums\NotificationType;
+use App\Livewire\Widgets\Notifications\Notify;
 use Closure;
 use Filament\Actions\Action;
-use Filament\Notifications\Notification;
 
 use Throwable;
 use Illuminate\Support\Facades\Log;
@@ -51,19 +52,13 @@ abstract class BaseButton
                     }
 
                     if ($this->successMessage) {
-                        Notification::make()
-                            ->title($this->successMessage)
-                            ->success()
-                            ->send();
+                        Notify::send($this->successMessage);
                     }
                 } catch (Throwable $e) {
                     Log::error("Action {$this->name} failed: {$e->getMessage()}");
 
                     if ($this->errorMessage) {
-                        Notification::make()
-                            ->title($this->errorMessage)
-                            ->danger()
-                            ->send();
+                        Notify::send($this->errorMessage, type: NotificationType::DANGER);
                     }
                 }
             });
