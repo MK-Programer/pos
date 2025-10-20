@@ -8,8 +8,8 @@ use App\Livewire\Inventories\ListInventories;
 use App\Livewire\Inventories\EditInventory;
 
 use App\Livewire\Items\ListItems;
+use App\Livewire\Items\CreateItem;
 use App\Livewire\Items\EditItem;
-
 
 use App\Livewire\Payment\ListPaymentMethods;
 use App\Livewire\Payment\EditPaymentMethod;
@@ -75,6 +75,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::prefix('items')->group(function(){
             Route::get('/', ListItems::class)->name('items.index');
+            Route::get('create', CreateItem::class)->name('item.create');
             Route::get('{record}/edit', EditItem::class)->name('item.edit');
         });
         

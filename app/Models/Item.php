@@ -16,6 +16,16 @@ class Item extends Model
         'status',
     ];
 
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucwords(strtolower($value));
+    }
+
+    public function setSkuAttribute($value)
+    {
+        $this->attributes['sku'] = strtoupper($value);
+    }
+
     public function inventory()
     {
         return $this->hasOne(Inventory::class);
