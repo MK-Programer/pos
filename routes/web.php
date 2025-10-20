@@ -1,16 +1,24 @@
 <?php
 
-use App\Livewire\Customer\EditCustomer;
-use App\Livewire\Customer\ListCustomers;
-use App\Livewire\Items\EditInventory;
-use App\Livewire\Items\EditItem;
-use App\Livewire\Items\ListInventories;
+
+use App\Livewire\Customers\ListCustomers;
+use App\Livewire\Customers\EditCustomer;
+
+use App\Livewire\Inventories\ListInventories;
+use App\Livewire\Inventories\EditInventory;
+
 use App\Livewire\Items\ListItems;
-use App\Livewire\Management\EditPaymentMethod;
-use App\Livewire\Management\EditUser;
-use App\Livewire\Management\ListPaymentMethods;
-use App\Livewire\Management\ListUsers;
+use App\Livewire\Items\EditItem;
+
+
+use App\Livewire\Payment\ListPaymentMethods;
+use App\Livewire\Payment\EditPaymentMethod;
+
+use App\Livewire\Users\ListUsers;
+use App\Livewire\Users\EditUser;
+
 use App\Livewire\Sales\ListSales;
+
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
