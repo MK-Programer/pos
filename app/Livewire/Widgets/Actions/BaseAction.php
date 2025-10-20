@@ -91,26 +91,6 @@ abstract class BaseAction
         return $this->toAction(); // automatically convert to Action
     }
 
-    public function handleRoute(string $routeName, array $params = []): Action
-    {
-        $this->handlerType = HandlerType::URL;
-
-        $this->handler = function ($record) use ($routeName, $params) {
-            if (!empty($params)) {
-                return route($routeName, $params);
-            }
-
-            if (Route::has($routeName)) {
-                return route($routeName, ['record' => $record->id]);
-            }
-
-            return '#';
-        };
-
-
-        return $this->toAction(); // automatically convert to Action
-    }
-
     // ===== Convert to Filament Action =====
     public function toAction(): Action
     {
