@@ -26,13 +26,13 @@
 
                 <flux:navlist.group :heading="__('Management')" class="grid">
                     <flux:navlist.item icon="users" :href="route('customers.index')" :current="request()->is('management/manage-customers*')" wire:navigate>{{ __('Manage Customers') }}</flux:navlist.item>
-                    <flux:navlist.item icon="banknotes" :href="route('payment.methods.index')" :current="request()->is('manage-payment-methods*')" wire:navigate>{{ __('Manage Payment Methods') }}</flux:navlist.item>
-                    <flux:navlist.item icon="user-group" :href="route('users.index')" :current="request()->is('manage-users*')" wire:navigate>{{ __('Manage Users') }}</flux:navlist.item>
+                    <flux:navlist.item icon="banknotes" :href="route('payment.methods.index')" :current="request()->is('management/manage-payment-methods*')" wire:navigate>{{ __('Manage Payment Methods') }}</flux:navlist.item>
+                    <flux:navlist.item icon="user-group" :href="route('users.index')" :current="request()->is('management/manage-users*')" wire:navigate>{{ __('Manage Users') }}</flux:navlist.item>
                 </flux:navlist.group>
 
                 <flux:navlist.group :heading="__('Inventory Management')" class="grid">
-                    <flux:navlist.item icon="cube" :href="route('items.index')" :current="request()->is('items*')" wire:navigate>{{ __('Items') }}</flux:navlist.item>
-                    <flux:navlist.item icon="queue-list" :href="route('inventories.index')" :current="request()->is('manage-inventories*')" wire:navigate>{{ __('Inventory') }}</flux:navlist.item>
+                    <flux:navlist.item icon="cube" :href="route('items.index')" :current="request()->is('inventory-management/items*')" wire:navigate>{{ __('Items') }}</flux:navlist.item>
+                    <flux:navlist.item icon="queue-list" :href="route('inventories.index')" :current="request()->is('inventory-management/manage-inventories*')" wire:navigate>{{ __('Inventory') }}</flux:navlist.item>
                 </flux:navlist.group>
 
                 <flux:navlist.group :heading="__('Sales')" class="grid">

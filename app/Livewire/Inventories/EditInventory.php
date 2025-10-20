@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Items;
+namespace App\Livewire\Inventories;
 
 use App\Livewire\Widgets\Notifications\Notify;
 use Filament\Actions\Concerns\InteractsWithActions;
@@ -66,6 +66,6 @@ class EditInventory extends Component implements HasActions, HasSchemas
 
     public function render(): View
     {
-        return view('livewire.items.edit-inventory');
+        return view('livewire.inventories.edit-inventory');
     }
 }

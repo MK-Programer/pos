@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Management;
+namespace App\Livewire\Payment;
 
 use App\Livewire\Widgets\Actions\DeleteAction;
 use App\Livewire\Widgets\Actions\EditAction;
@@ -55,6 +55,6 @@ class ListPaymentMethods extends Component implements HasActions, HasSchemas, Ha
 
     public function render(): View
     {
-        return view('livewire.management.list-payment-methods');
+        return view('livewire.payment.list-payment-methods');
     }
 }

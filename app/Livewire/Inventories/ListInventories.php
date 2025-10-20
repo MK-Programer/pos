@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Management;
+namespace App\Livewire\Inventories;
 
 use App\Livewire\Widgets\Actions\DeleteAction;
 use App\Livewire\Widgets\Actions\EditAction;
@@ -14,11 +14,11 @@ use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
-use Livewire\Component;
-use App\Models\User;
+use App\Models\Inventory;
 use Filament\Tables\Columns\TextColumn;
+use Livewire\Component;
 
-class ListUsers extends Component implements HasActions, HasSchemas, HasTable
+class ListInventories extends Component implements HasActions, HasSchemas, HasTable
 {
     use InteractsWithActions;
     use InteractsWithTable;
@@ -27,18 +27,19 @@ class ListUsers extends Component implements HasActions, HasSchemas, HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(fn (): Builder => User::query())
+            ->query(fn (): Builder => Inventory::query())
             ->columns([
-                TextColumn::make('name')
+                TextColumn::make('item.name')
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('email')
-                    ->searchable(),
+                TextColumn::make('quantity')
+                    ->badge()
+                    ->sortable(),
+
+                TextColumn::make('maked_at')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 
-                TextColumn::make('role')
-                    ->searchable()
-                    ->badge(),
             ])
             ->filters([
                 //
@@ -47,7 +48,7 @@ class ListUsers extends Component implements HasActions, HasSchemas, HasTable
                 //
             ])
             ->recordActions([
-                EditAction::make()->handleRoute('user.edit'),
+                EditAction::make()->handleRoute('inventory.edit'),
                 DeleteAction::make(),
             ])
             ->toolbarActions([
@@ -59,6 +60,6 @@ class ListUsers extends Component implements HasActions, HasSchemas, HasTable
 
     public function render(): View
     {
-        return view('livewire.management.list-users');
+        return view('livewire.inventories.list-inventories');
     }
 }
