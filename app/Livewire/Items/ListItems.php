@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Items;
 
+use App\Livewire\Widgets\Actions\CreateAction;
 use App\Livewire\Widgets\Actions\DeleteAction;
 use App\Livewire\Widgets\Actions\EditAction;
 use Filament\Actions\BulkActionGroup;
@@ -49,6 +50,7 @@ class ListItems extends Component implements HasActions, HasSchemas, HasTable
                 //
             ])
             ->headerActions([
+                CreateAction::make()->handleRoute('item.create'),
             ])
             ->recordActions([
                 EditAction::make()->handleRoute('item.edit'),
