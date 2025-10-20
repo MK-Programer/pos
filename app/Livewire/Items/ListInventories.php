@@ -2,7 +2,8 @@
 
 namespace App\Livewire\Items;
 
-use App\Livewire\Widgets\Buttons\DeleteButton;
+use App\Livewire\Widgets\Actions\DeleteAction;
+use App\Livewire\Widgets\Actions\EditAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -36,7 +37,7 @@ class ListInventories extends Component implements HasActions, HasSchemas, HasTa
                     ->badge()
                     ->sortable(),
 
-                TextColumn::make('created_at')
+                TextColumn::make('maked_at')
                     ->toggleable(isToggledHiddenByDefault: true),
                 
             ])
@@ -47,7 +48,8 @@ class ListInventories extends Component implements HasActions, HasSchemas, HasTa
                 //
             ])
             ->recordActions([
-                DeleteButton::make(),
+                EditAction::make()->handleRoute('inventory.edit'),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

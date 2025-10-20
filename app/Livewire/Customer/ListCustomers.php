@@ -2,7 +2,8 @@
 
 namespace App\Livewire\Customer;
 
-use App\Livewire\Widgets\Buttons\DeleteButton;
+use App\Livewire\Widgets\Actions\DeleteAction;
+use App\Livewire\Widgets\Actions\EditAction;
 use App\Models\Customer;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
@@ -44,7 +45,8 @@ class ListCustomers extends Component implements HasActions, HasSchemas, HasTabl
                 //
             ])
             ->recordActions([
-                DeleteButton::make(),
+                EditAction::make()->handleRoute('customer.edit'),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

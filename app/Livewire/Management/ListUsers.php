@@ -2,7 +2,8 @@
 
 namespace App\Livewire\Management;
 
-use App\Livewire\Widgets\Buttons\DeleteButton;
+use App\Livewire\Widgets\Actions\DeleteAction;
+use App\Livewire\Widgets\Actions\EditAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -46,7 +47,8 @@ class ListUsers extends Component implements HasActions, HasSchemas, HasTable
                 //
             ])
             ->recordActions([
-                DeleteButton::make(),
+                EditAction::make()->handleRoute('user.edit'),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
