@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Sales;
 
-use App\Livewire\Widgets\Buttons\DeleteButton;
+use App\Livewire\Widgets\Actions\DeleteAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -36,7 +36,7 @@ class ListSales extends Component implements HasActions, HasSchemas, HasTable
                 //
             ])
             ->recordActions([
-                DeleteButton::make(),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

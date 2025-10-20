@@ -2,7 +2,8 @@
 
 namespace App\Livewire\Management;
 
-use App\Livewire\Widgets\Buttons\DeleteButton;
+use App\Livewire\Widgets\Actions\DeleteAction;
+use App\Livewire\Widgets\Actions\EditAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -42,7 +43,8 @@ class ListPaymentMethods extends Component implements HasActions, HasSchemas, Ha
                 //
             ])
             ->recordActions([
-                DeleteButton::make(),
+                EditAction::make()->handleRoute('payment.method.edit'),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

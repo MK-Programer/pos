@@ -15,7 +15,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Section;
 use Livewire\Component;
-use PhpParser\Node\Stmt\Label;
 
 class EditItem extends Component implements HasActions, HasSchemas
 {

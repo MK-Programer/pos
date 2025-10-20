@@ -1,9 +1,13 @@
 <?php
 
+use App\Livewire\Customer\EditCustomer;
 use App\Livewire\Customer\ListCustomers;
+use App\Livewire\Items\EditInventory;
 use App\Livewire\Items\EditItem;
 use App\Livewire\Items\ListInventories;
 use App\Livewire\Items\ListItems;
+use App\Livewire\Management\EditPaymentMethod;
+use App\Livewire\Management\EditUser;
 use App\Livewire\Management\ListPaymentMethods;
 use App\Livewire\Management\ListUsers;
 use App\Livewire\Sales\ListSales;
@@ -41,11 +45,22 @@ Route::middleware(['auth'])->group(function () {
         ->name('two-factor.show');
     
     Route::prefix('management')->group(function(){
-        Route::get('manage-customers', ListCustomers::class)->name('customers.index');
 
-        Route::get('manage-payment-methods', ListPaymentMethods::class)->name('payment.methods.index');
+        Route::prefix('manage-customers')->group(function(){
+            Route::get('/', ListCustomers::class)->name('customers.index');
+            Route::get('{record}/edit', EditCustomer::class)->name('customer.edit');
+        });
 
-        Route::get('manage-users', ListUsers::class)->name('users.index');
+        Route::prefix('manage-payment-methods')->group(function(){
+            Route::get('/', ListPaymentMethods::class)->name('payment.methods.index');
+            Route::get('{record}/edit', EditPaymentMethod::class)->name('payment.method.edit');
+        });
+
+        Route::prefix('manage-users')->group(function(){
+            Route::get('/', ListUsers::class)->name('users.index');
+            Route::get('{record}/edit', EditUser::class)->name('user.edit');
+        });
+
     });
 
     Route::prefix('inventory-management')->group(function(){
@@ -55,8 +70,11 @@ Route::middleware(['auth'])->group(function () {
             Route::get('{record}/edit', EditItem::class)->name('item.edit');
         });
         
-    
-        Route::get('manage-inventories', ListInventories::class)->name('inventories.index');
+        Route::prefix('manage-inventories')->group(function(){
+            Route::get('/', ListInventories::class)->name('inventories.index');
+            Route::get('{record}/edit', EditInventory::class)->name('inventory.edit');
+        });
+        
     });
 
     Route::prefix('sales')->group(function(){
