@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Livewire\Management;
+namespace App\Livewire\Customers;
 
 use App\Livewire\Widgets\Notifications\Notify;
-use App\Models\PaymentMethod;
+use App\Models\Customer;
 use Exception;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
@@ -16,12 +15,12 @@ use Filament\Schemas\Schema;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
-class EditPaymentMethod extends Component implements HasActions, HasSchemas
+class EditCustomer extends Component implements HasActions, HasSchemas
 {
     use InteractsWithActions;
     use InteractsWithSchemas;
 
-    public PaymentMethod $record;
+    public Customer $record;
 
     public ?array $data = [];
 
@@ -34,15 +33,22 @@ class EditPaymentMethod extends Component implements HasActions, HasSchemas
     {
         return $schema
             ->components([
-                Section::make('Edit Payment Method')
-                    ->description('Update the information below to edit this payment method.')
+                Section::make('Edit Customer')
+                    ->description('Update the information below to edit this customer.')
                     ->columns(2)
                     ->schema([
                         TextInput::make('name')
                             ->required(),
 
-                        Textarea::make('description')
-                            ->nullable(),
+                        TextInput::make('email')
+                            ->nullable()
+                            ->email()
+                            ->unique(ignoreRecord: true),
+
+                        TextInput::make('phone')
+                            ->nullable()
+                            ->tel()
+                            ->unique(ignoreRecord: true),
                     ]),
             ])
             ->statePath('data')
@@ -56,14 +62,14 @@ class EditPaymentMethod extends Component implements HasActions, HasSchemas
 
             $this->record->update($data);
 
-            Notify::send('Updated successfully', "Payment Method {$this->record->name} has been updated successfully");
+            Notify::send('Updated successfully', "Customer {$this->record->name} has been updated successfully");
         }catch(Exception $e){
-            Notify::send('Update failure', "Failed to update Payment Method {$this->record->name}");
+            Notify::send('Update failure', "Failed to update Customer {$this->record->name}");
         }
     }
 
     public function render(): View
     {
-        return view('livewire.management.edit-payment-method');
+        return view('livewire.customers.edit-customer');
     }
 }

@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Livewire\Customer;
+namespace App\Livewire\Users;
 
 use App\Livewire\Widgets\Notifications\Notify;
-use App\Models\Customer;
+use App\Models\User;
 use Exception;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
@@ -15,12 +18,12 @@ use Filament\Schemas\Schema;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
-class EditCustomer extends Component implements HasActions, HasSchemas
+class EditUser extends Component implements HasActions, HasSchemas
 {
     use InteractsWithActions;
     use InteractsWithSchemas;
 
-    public Customer $record;
+    public User $record;
 
     public ?array $data = [];
 
@@ -33,8 +36,8 @@ class EditCustomer extends Component implements HasActions, HasSchemas
     {
         return $schema
             ->components([
-                Section::make('Edit Customer')
-                    ->description('Update the information below to edit this customer.')
+                Section::make('Edit User')
+                    ->description('Update the information below to edit this user.')
                     ->columns(2)
                     ->schema([
                         TextInput::make('name')
@@ -45,10 +48,14 @@ class EditCustomer extends Component implements HasActions, HasSchemas
                             ->email()
                             ->unique(ignoreRecord: true),
 
-                        TextInput::make('phone')
-                            ->nullable()
-                            ->tel()
-                            ->unique(ignoreRecord: true),
+                        Select::make('role')
+                            ->options([
+                                'cashier' => 'Cashier', 
+                                'admin' => 'Admin',
+                                'other' => 'Other',
+                            ])
+                            ->native(false)
+                            ->required(),
                     ]),
             ])
             ->statePath('data')
@@ -62,14 +69,14 @@ class EditCustomer extends Component implements HasActions, HasSchemas
 
             $this->record->update($data);
 
-            Notify::send('Updated successfully', "Customer {$this->record->name} has been updated successfully");
+            Notify::send('Updated successfully', "User {$this->record->name} has been updated successfully");
         }catch(Exception $e){
-            Notify::send('Update failure', "Failed to update Customer {$this->record->name}");
+            Notify::send('Update failure', "Failed to update User {$this->record->name}");
         }
     }
 
     public function render(): View
     {
-        return view('livewire.customer.edit-customer');
+        return view('livewire.users.edit-user');
     }
 }
