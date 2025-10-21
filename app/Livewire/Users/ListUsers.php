@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Users;
 
+use App\Livewire\Widgets\Actions\CreateAction;
 use App\Livewire\Widgets\Actions\DeleteAction;
 use App\Livewire\Widgets\Actions\EditAction;
 use Filament\Actions\BulkActionGroup;
@@ -27,6 +28,7 @@ class ListUsers extends Component implements HasActions, HasSchemas, HasTable
     public function table(Table $table): Table
     {
         return $table
+            ->heading('List Users')
             ->query(fn (): Builder => User::query())
             ->columns([
                 TextColumn::make('name')
@@ -44,7 +46,7 @@ class ListUsers extends Component implements HasActions, HasSchemas, HasTable
                 //
             ])
             ->headerActions([
-                //
+                CreateAction::make()->handleRoute('user.create'),
             ])
             ->recordActions([
                 EditAction::make()->handleRoute('user.edit'),

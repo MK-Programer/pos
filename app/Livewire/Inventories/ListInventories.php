@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Inventories;
 
+use App\Livewire\Widgets\Actions\CreateAction;
 use App\Livewire\Widgets\Actions\DeleteAction;
 use App\Livewire\Widgets\Actions\EditAction;
 use Filament\Actions\BulkActionGroup;
@@ -27,6 +28,7 @@ class ListInventories extends Component implements HasActions, HasSchemas, HasTa
     public function table(Table $table): Table
     {
         return $table
+            ->heading('List Inventories')
             ->query(fn (): Builder => Inventory::query())
             ->columns([
                 TextColumn::make('item.name')
@@ -45,7 +47,7 @@ class ListInventories extends Component implements HasActions, HasSchemas, HasTa
                 //
             ])
             ->headerActions([
-                //
+                CreateAction::make()->handleRoute('inventory.create')
             ])
             ->recordActions([
                 EditAction::make()->handleRoute('inventory.edit'),

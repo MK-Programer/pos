@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Customers;
 
+use App\Livewire\Widgets\Actions\CreateAction;
 use App\Livewire\Widgets\Actions\DeleteAction;
 use App\Livewire\Widgets\Actions\EditAction;
 use App\Models\Customer;
@@ -27,6 +28,7 @@ class ListCustomers extends Component implements HasActions, HasSchemas, HasTabl
     public function table(Table $table): Table
     {
         return $table
+            ->heading('List Customers')
             ->query(fn (): Builder => Customer::query())
             ->columns([
                 TextColumn::make('name')
@@ -42,7 +44,7 @@ class ListCustomers extends Component implements HasActions, HasSchemas, HasTabl
                 //
             ])
             ->headerActions([
-                //
+                CreateAction::make()->handleRoute('customer.create'),
             ])
             ->recordActions([
                 EditAction::make()->handleRoute('customer.edit'),

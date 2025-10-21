@@ -30,6 +30,7 @@ class ListItems extends Component implements HasActions, HasSchemas, HasTable
     public function table(Table $table): Table
     {
         return $table
+            ->heading('List Items')
             ->query(fn (): Builder => Item::query())
             ->columns([
                 TextColumn::make('name')

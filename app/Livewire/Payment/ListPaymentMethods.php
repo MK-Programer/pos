@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Payment;
 
+use App\Livewire\Widgets\Actions\CreateAction;
 use App\Livewire\Widgets\Actions\DeleteAction;
 use App\Livewire\Widgets\Actions\EditAction;
 use Filament\Actions\BulkActionGroup;
@@ -27,6 +28,7 @@ class ListPaymentMethods extends Component implements HasActions, HasSchemas, Ha
     public function table(Table $table): Table
     {
         return $table
+            ->heading('List Payment Methods')
             ->query(fn (): Builder => PaymentMethod::query())
             ->columns([
                 TextColumn::make('name')
@@ -40,7 +42,7 @@ class ListPaymentMethods extends Component implements HasActions, HasSchemas, Ha
                 //
             ])
             ->headerActions([
-                //
+                CreateAction::make()->handleRoute('payment.method.create'),
             ])
             ->recordActions([
                 EditAction::make()->handleRoute('payment.method.edit'),
