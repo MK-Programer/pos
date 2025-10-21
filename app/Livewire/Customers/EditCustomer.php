@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Customers;
 
+use App\Enums\NotificationType;
 use App\Livewire\Widgets\Notifications\Notify;
 use App\Models\Customer;
 use Exception;
@@ -64,7 +65,7 @@ class EditCustomer extends Component implements HasActions, HasSchemas
 
             Notify::send('Updated successfully', "Customer {$this->record->name} has been updated successfully");
         }catch(Exception $e){
-            Notify::send('Update failure', "Failed to update Customer {$this->record->name}");
+            Notify::send('Update failure', "Failed to update Customer {$this->record->name}", NotificationType::DANGER);
         }
     }
 

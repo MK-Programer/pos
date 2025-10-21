@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Items;
 
+use App\Enums\NotificationType;
 use App\Livewire\Widgets\Notifications\Notify;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -73,7 +74,7 @@ class EditItem extends Component implements HasActions, HasSchemas
 
             Notify::send('Updated successfully', "Item {$this->record->name} has been updated successfully");
         }catch(Exception $e){
-            Notify::send('Update failure', "Failed to update Item {$this->record->name}");
+            Notify::send('Update failure', "Failed to update Item {$this->record->name}", NotificationType::DANGER);
         }
     }
 

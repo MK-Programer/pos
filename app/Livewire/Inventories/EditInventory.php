@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Inventories;
 
+use App\Enums\NotificationType;
 use App\Livewire\Widgets\Notifications\Notify;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -60,7 +61,7 @@ class EditInventory extends Component implements HasActions, HasSchemas
 
             Notify::send('Updated successfully', "Inventory for {$this->record->item->name} has been updated successfully");
         }catch(Exception $e){
-            Notify::send('Update failure', "Failed to update the Inventory of {$this->record->item->name}");
+            Notify::send('Update failure', "Failed to update the Inventory of {$this->record->item->name}", NotificationType::DANGER);
         }
     }
 
