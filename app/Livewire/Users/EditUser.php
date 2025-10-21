@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Users;
 
+use App\Enums\NotificationType;
 use App\Livewire\Widgets\Notifications\Notify;
 use App\Models\User;
 use Exception;
@@ -44,9 +45,9 @@ class EditUser extends Component implements HasActions, HasSchemas
                             ->required(),
 
                         TextInput::make('email')
-                            ->nullable()
                             ->email()
-                            ->unique(ignoreRecord: true),
+                            ->unique(ignoreRecord: true)
+                            ->required(),
 
                         Select::make('role')
                             ->options([
@@ -71,7 +72,7 @@ class EditUser extends Component implements HasActions, HasSchemas
 
             Notify::send('Updated successfully', "User {$this->record->name} has been updated successfully");
         }catch(Exception $e){
-            Notify::send('Update failure', "Failed to update User {$this->record->name}");
+            Notify::send('Update failure', "Failed to update User {$this->record->name}", NotificationType::DANGER);
         }
     }
 

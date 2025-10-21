@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Payment;
 
+use App\Enums\NotificationType;
 use App\Livewire\Widgets\Notifications\Notify;
 use App\Models\PaymentMethod;
 use Exception;
@@ -58,7 +59,7 @@ class EditPaymentMethod extends Component implements HasActions, HasSchemas
 
             Notify::send('Updated successfully', "Payment Method {$this->record->name} has been updated successfully");
         }catch(Exception $e){
-            Notify::send('Update failure', "Failed to update Payment Method {$this->record->name}");
+            Notify::send('Update failure', "Failed to update Payment Method {$this->record->name}", NotificationType::DANGER);
         }
     }
 
