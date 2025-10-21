@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Items;
 
-use App\Enums\NotificationType;
 use App\Livewire\Widgets\Notifications\Notify;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -11,7 +10,6 @@ use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Illuminate\Contracts\View\View;
 use App\Models\Item;
-use Exception;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Section;
@@ -67,15 +65,11 @@ class EditItem extends Component implements HasActions, HasSchemas
 
     public function save(): void
     {
-        try{
-            $data = $this->form->getState();
+        $data = $this->form->getState();
 
-            $this->record->update($data);
+        $this->record->update($data);
 
-            Notify::send('Updated successfully', "Item {$this->record->name} has been updated successfully");
-        }catch(Exception $e){
-            Notify::send('Update failure', "Failed to update Item {$this->record->name}", NotificationType::DANGER);
-        }
+        Notify::send('Updated successfully', "Item {$this->record->name} has been updated successfully");
     }
 
     public function render(): View

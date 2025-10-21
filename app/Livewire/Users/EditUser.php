@@ -2,16 +2,12 @@
 
 namespace App\Livewire\Users;
 
-use App\Enums\NotificationType;
 use App\Livewire\Widgets\Notifications\Notify;
 use App\Models\User;
-use Exception;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
@@ -65,15 +61,11 @@ class EditUser extends Component implements HasActions, HasSchemas
 
     public function save(): void
     {
-        try{
-            $data = $this->form->getState();
+        $data = $this->form->getState();
 
-            $this->record->update($data);
+        $this->record->update($data);
 
-            Notify::send('Updated successfully', "User {$this->record->name} has been updated successfully");
-        }catch(Exception $e){
-            Notify::send('Update failure', "Failed to update User {$this->record->name}", NotificationType::DANGER);
-        }
+        Notify::send('Updated successfully', "User {$this->record->name} has been updated successfully");
     }
 
     public function render(): View
