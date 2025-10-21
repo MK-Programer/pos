@@ -25,6 +25,7 @@ class ListSales extends Component implements HasActions, HasSchemas, HasTable
     public function table(Table $table): Table
     {
         return $table
+            ->heading('List Sales')
             ->query(fn (): Builder => Sale::query())
             ->columns([
                 //
