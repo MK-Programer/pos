@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\POS;
+
 use App\Livewire\Customers\ListCustomers;
 use App\Livewire\Customers\CreateCustomer;
 use App\Livewire\Customers\EditCustomer;
@@ -55,6 +57,8 @@ Route::middleware(['auth'])->group(function () {
         )
         ->name('two-factor.show');
     
+    Route::get('pos', POS::class)->name('pos');
+
     Route::prefix('management')->group(function(){
 
         Route::prefix('manage-customers')->group(function(){
