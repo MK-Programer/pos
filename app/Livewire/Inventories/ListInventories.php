@@ -39,7 +39,7 @@ class ListInventories extends Component implements HasActions, HasSchemas, HasTa
                     ->badge()
                     ->sortable(),
 
-                TextColumn::make('maked_at')
+                TextColumn::make('created_at')
                     ->toggleable(isToggledHiddenByDefault: true),
                 
             ])
