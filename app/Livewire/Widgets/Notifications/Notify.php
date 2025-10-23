@@ -14,7 +14,7 @@ class Notify
     ): void {
         $notification = Notification::make()
             ->title($title)
-            ->body($body);
+            ->body($body.'.');
 
         match ($type) {
             NotificationType::SUCCESS => $notification->success(),
