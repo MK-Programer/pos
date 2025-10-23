@@ -40,6 +40,10 @@ class ListItems extends Component implements HasActions, HasSchemas, HasTable
                     ->searchable()
                     ->sortable(),
 
+                TextColumn::make('inventory.quantity')
+                    ->badge()
+                    ->sortable(),
+
                 TextColumn::make('price')
                     ->sortable()
                     ->money(),
